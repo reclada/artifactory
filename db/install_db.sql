@@ -1,25 +1,10 @@
--- version = 28
--- 2021-09-21 09:50:35.353264
-/*
-update_config.json:
-
-{
-    "branch_db" : "for_domino",
-    "branch_runtime" : "for_domino",
-    "branch_SciNLP" : "main",
-    "server" : "dev-reclada-k8s.c9lpgtggzz0d.eu-west-1.rds.amazonaws.com",  
-    "db" : "dev3_reclada_k8s",
-    "db_user" : "reclada",
-    "quick_install" : true,
-    "version": "latest"
-}
-*/
---
+-- version = 29
+-- 2021-09-21 19:20:30.173301--
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 13.3
--- Dumped by pg_dump version 13.3
+-- Dumped by pg_dump version 13.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -33,13 +18,11 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: api; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: api; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA api;
 
-
-ALTER SCHEMA api OWNER TO reclada;
 
 --
 -- Name: aws_commons; Type: EXTENSION; Schema: -; Owner: -
@@ -49,7 +32,7 @@ CREATE EXTENSION IF NOT EXISTS aws_commons WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION aws_commons; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION aws_commons; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION aws_commons IS 'Common data types across AWS services';
@@ -63,74 +46,60 @@ CREATE EXTENSION IF NOT EXISTS aws_lambda WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION aws_lambda; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION aws_lambda; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION aws_lambda IS 'AWS Lambda integration';
 
 
 --
--- Name: dev; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: dev; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA dev;
 
 
-ALTER SCHEMA dev OWNER TO reclada;
-
 --
--- Name: reclada; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada;
 
 
-ALTER SCHEMA reclada OWNER TO reclada;
-
 --
--- Name: reclada_notification; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada_notification; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada_notification;
 
 
-ALTER SCHEMA reclada_notification OWNER TO reclada;
-
 --
--- Name: reclada_object; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada_object; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada_object;
 
 
-ALTER SCHEMA reclada_object OWNER TO reclada;
-
 --
--- Name: reclada_revision; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada_revision; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada_revision;
 
 
-ALTER SCHEMA reclada_revision OWNER TO reclada;
-
 --
--- Name: reclada_storage; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada_storage; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada_storage;
 
 
-ALTER SCHEMA reclada_storage OWNER TO reclada;
-
 --
--- Name: reclada_user; Type: SCHEMA; Schema: -; Owner: reclada
+-- Name: reclada_user; Type: SCHEMA; Schema: -; Owner: -
 --
 
 CREATE SCHEMA reclada_user;
 
-
-ALTER SCHEMA reclada_user OWNER TO reclada;
 
 --
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: -
@@ -140,14 +109,14 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: -
 --
 
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
 --
--- Name: auth_get_login_url(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: auth_get_login_url(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.auth_get_login_url(data jsonb) RETURNS jsonb
@@ -171,10 +140,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.auth_get_login_url(data jsonb) OWNER TO reclada;
-
 --
--- Name: hello_world(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: hello_world(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.hello_world(data jsonb) RETURNS text
@@ -198,10 +165,8 @@ SELECT 'Hello, world!';
 $$;
 
 
-ALTER FUNCTION api.hello_world(data jsonb) OWNER TO reclada;
-
 --
--- Name: hello_world(text); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: hello_world(text); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.hello_world(data text) RETURNS text
@@ -211,10 +176,8 @@ SELECT 'Hello, world!';
 $$;
 
 
-ALTER FUNCTION api.hello_world(data text) OWNER TO reclada;
-
 --
--- Name: reclada_object_create(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_create(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_create(data jsonb) RETURNS jsonb
@@ -263,10 +226,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_create(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_delete(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_delete(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_delete(data jsonb) RETURNS jsonb
@@ -304,10 +265,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_delete(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_list(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_list(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_list(data jsonb) RETURNS jsonb
@@ -340,10 +299,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_list(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_list_add(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_list_add(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_list_add(data jsonb) RETURNS jsonb
@@ -393,10 +350,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_list_add(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_list_drop(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_list_drop(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_list_drop(data jsonb) RETURNS jsonb
@@ -446,10 +401,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_list_drop(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_list_related(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_list_related(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_list_related(data jsonb) RETURNS jsonb
@@ -499,10 +452,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_list_related(data jsonb) OWNER TO reclada;
-
 --
--- Name: reclada_object_update(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: reclada_object_update(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.reclada_object_update(data jsonb) RETURNS jsonb
@@ -546,10 +497,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.reclada_object_update(data jsonb) OWNER TO reclada;
-
 --
--- Name: storage_generate_presigned_get(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: storage_generate_presigned_get(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.storage_generate_presigned_get(data jsonb) RETURNS jsonb
@@ -603,10 +552,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.storage_generate_presigned_get(data jsonb) OWNER TO reclada;
-
 --
--- Name: storage_generate_presigned_post(jsonb); Type: FUNCTION; Schema: api; Owner: reclada
+-- Name: storage_generate_presigned_post(jsonb); Type: FUNCTION; Schema: api; Owner: -
 --
 
 CREATE FUNCTION api.storage_generate_presigned_post(data jsonb) RETURNS jsonb
@@ -688,10 +635,8 @@ END;
 $$;
 
 
-ALTER FUNCTION api.storage_generate_presigned_post(data jsonb) OWNER TO reclada;
-
 --
--- Name: downgrade_version(); Type: FUNCTION; Schema: dev; Owner: reclada
+-- Name: downgrade_version(); Type: FUNCTION; Schema: dev; Owner: -
 --
 
 CREATE FUNCTION dev.downgrade_version() RETURNS text
@@ -759,10 +704,8 @@ END
 $$;
 
 
-ALTER FUNCTION dev.downgrade_version() OWNER TO reclada;
-
 --
--- Name: reg_notice(text); Type: FUNCTION; Schema: dev; Owner: reclada
+-- Name: reg_notice(text); Type: FUNCTION; Schema: dev; Owner: -
 --
 
 CREATE FUNCTION dev.reg_notice(msg text) RETURNS void
@@ -776,10 +719,8 @@ END
 $$;
 
 
-ALTER FUNCTION dev.reg_notice(msg text) OWNER TO reclada;
-
 --
--- Name: datasource_insert_trigger_fnc(); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: datasource_insert_trigger_fnc(); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.datasource_insert_trigger_fnc() RETURNS trigger
@@ -834,10 +775,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada.datasource_insert_trigger_fnc() OWNER TO reclada;
-
 --
--- Name: load_staging(); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: load_staging(); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.load_staging() RETURNS trigger
@@ -850,10 +789,8 @@ END
 $$;
 
 
-ALTER FUNCTION reclada.load_staging() OWNER TO reclada;
-
 --
--- Name: raise_exception(text); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: raise_exception(text); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.raise_exception(msg text) RETURNS void
@@ -866,10 +803,8 @@ END
 $$;
 
 
-ALTER FUNCTION reclada.raise_exception(msg text) OWNER TO reclada;
-
 --
--- Name: raise_notice(text); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: raise_notice(text); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.raise_notice(msg text) RETURNS void
@@ -882,10 +817,8 @@ END
 $$;
 
 
-ALTER FUNCTION reclada.raise_notice(msg text) OWNER TO reclada;
-
 --
--- Name: try_cast_int(text, integer); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: try_cast_int(text, integer); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.try_cast_int(p_in text, p_default integer DEFAULT NULL::integer) RETURNS integer
@@ -899,10 +832,8 @@ end;
 $$;
 
 
-ALTER FUNCTION reclada.try_cast_int(p_in text, p_default integer) OWNER TO reclada;
-
 --
--- Name: try_cast_uuid(text, integer); Type: FUNCTION; Schema: reclada; Owner: reclada
+-- Name: try_cast_uuid(text, integer); Type: FUNCTION; Schema: reclada; Owner: -
 --
 
 CREATE FUNCTION reclada.try_cast_uuid(p_in text, p_default integer DEFAULT NULL::integer) RETURNS uuid
@@ -916,10 +847,8 @@ end;
 $$;
 
 
-ALTER FUNCTION reclada.try_cast_uuid(p_in text, p_default integer) OWNER TO reclada;
-
 --
--- Name: listen(character varying); Type: FUNCTION; Schema: reclada_notification; Owner: reclada
+-- Name: listen(character varying); Type: FUNCTION; Schema: reclada_notification; Owner: -
 --
 
 CREATE FUNCTION reclada_notification.listen(channel character varying) RETURNS void
@@ -931,10 +860,8 @@ END
 $$;
 
 
-ALTER FUNCTION reclada_notification.listen(channel character varying) OWNER TO reclada;
-
 --
--- Name: send(character varying, jsonb); Type: FUNCTION; Schema: reclada_notification; Owner: reclada
+-- Name: send(character varying, jsonb); Type: FUNCTION; Schema: reclada_notification; Owner: -
 --
 
 CREATE FUNCTION reclada_notification.send(channel character varying, payload jsonb DEFAULT NULL::jsonb) RETURNS void
@@ -946,10 +873,8 @@ END
 $$;
 
 
-ALTER FUNCTION reclada_notification.send(channel character varying, payload jsonb) OWNER TO reclada;
-
 --
--- Name: send_object_notification(character varying, jsonb); Type: FUNCTION; Schema: reclada_notification; Owner: reclada
+-- Name: send_object_notification(character varying, jsonb); Type: FUNCTION; Schema: reclada_notification; Owner: -
 --
 
 CREATE FUNCTION reclada_notification.send_object_notification(event character varying, object_data jsonb) RETURNS void
@@ -1014,10 +939,8 @@ END
 $_$;
 
 
-ALTER FUNCTION reclada_notification.send_object_notification(event character varying, object_data jsonb) OWNER TO reclada;
-
 --
--- Name: cast_jsonb_to_postgres(text, text, text); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: cast_jsonb_to_postgres(text, text, text); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.cast_jsonb_to_postgres(key_path text, type text, type_of_array text DEFAULT 'text'::text) RETURNS text
@@ -1045,10 +968,8 @@ SELECT
 $$;
 
 
-ALTER FUNCTION reclada_object.cast_jsonb_to_postgres(key_path text, type text, type_of_array text) OWNER TO reclada;
-
 --
--- Name: create(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: create(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object."create"(data_jsonb jsonb, user_info jsonb DEFAULT '{}'::jsonb) RETURNS jsonb
@@ -1063,7 +984,7 @@ DECLARE
     schema     jsonb;
     obj_GUID   uuid;
     res        jsonb;
-
+    affected   uuid[];
 BEGIN
 
     IF (jsonb_typeof(data_jsonb) != 'array') THEN
@@ -1071,9 +992,7 @@ BEGIN
     END IF;
     /*TODO: check if some objects have revision and others do not */
     branch:= data_jsonb->0->'branch';
-    create temp table IF NOT EXISTS tmp(id uuid)
-        ON COMMIT drop;
-    delete from tmp;
+
     FOR data IN SELECT jsonb_array_elements(data_jsonb) 
     LOOP
 
@@ -1089,15 +1008,15 @@ BEGIN
             RAISE EXCEPTION 'The reclada object must have attributes';
         END IF;
 
-        if class_uuid is null then
+        IF class_uuid IS NULL THEN
             SELECT reclada_object.get_schema(class_name) 
-                INTO schema;
-        else
-            select v.data 
-                from reclada.v_class v
-                    where class_uuid = v.obj_id
-                INTO schema;
-        end if;
+            INTO schema;
+        ELSE
+            SELECT v.data 
+            FROM reclada.v_class v
+            WHERE class_uuid = v.obj_id
+            INTO schema;
+        END IF;
         IF (schema IS NULL) THEN
             RAISE EXCEPTION 'No json schema available for %', class_name;
         END IF;
@@ -1106,32 +1025,29 @@ BEGIN
             RAISE EXCEPTION 'JSON invalid: %', attrs;
         END IF;
         
-        if data->>'id' is not null then
+        IF data->>'id' IS NOT NULL THEN
             RAISE EXCEPTION '%','Field "id" not allow!!!';
-        end if;
+        END IF;
         obj_GUID := (data->>'GUID')::uuid;
         IF EXISTS (
-            select 1 from reclada.object 
-                where GUID = obj_GUID
-        ) then
+            SELECT 1
+            FROM reclada.object 
+            WHERE GUID = obj_GUID
+        ) THEN
             RAISE EXCEPTION 'GUID: % is duplicate', obj_GUID;
-        end if;
+        END IF;
         --raise notice 'schema: %',schema;
-        with inserted as 
-        (
-            INSERT INTO reclada.object(GUID,class,attributes)
-                select  case
-                            when obj_GUID IS NULL
-                                then public.uuid_generate_v4()
-                            else obj_GUID
-                        end as GUID,
-                        (schema->>'GUID')::uuid, 
-                        attrs                
-                RETURNING GUID
-        ) 
-        insert into tmp(id)
-            select GUID 
-                from inserted;
+
+        INSERT INTO reclada.object(GUID,class,attributes)
+            SELECT  CASE
+                        WHEN obj_GUID IS NULL
+                            THEN public.uuid_generate_v4()
+                        ELSE obj_GUID
+                    END AS GUID,
+                    (schema->>'GUID')::uuid, 
+                    attrs                
+        RETURNING GUID INTO obj_GUID;
+        affected := array_append( affected, obj_GUID);
 
     END LOOP;
 
@@ -1139,10 +1055,9 @@ BEGIN
             (
                 array
                 (
-                    select o.data 
-                        from reclada.v_active_object o
-                        join tmp t
-                            on t.id = o.obj_id
+                    SELECT o.data 
+                    FROM reclada.v_active_object o
+                    WHERE o.obj_id = ANY (affected)
                 )
             )::jsonb; 
     PERFORM reclada_notification.send_object_notification
@@ -1156,10 +1071,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object."create"(data_jsonb jsonb, user_info jsonb) OWNER TO reclada;
-
 --
--- Name: create_subclass(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: create_subclass(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.create_subclass(data jsonb) RETURNS void
@@ -1225,10 +1138,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.create_subclass(data jsonb) OWNER TO reclada;
-
 --
--- Name: delete(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: delete(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.delete(data jsonb, user_info jsonb DEFAULT '{}'::jsonb) RETURNS jsonb
@@ -1268,10 +1179,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.delete(data jsonb, user_info jsonb) OWNER TO reclada;
-
 --
--- Name: get_active_status_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_active_status_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_active_status_obj_id() RETURNS uuid
@@ -1311,10 +1220,8 @@ CREATE FUNCTION reclada_object.get_active_status_obj_id() RETURNS uuid
 $$;
 
 
-ALTER FUNCTION reclada_object.get_active_status_obj_id() OWNER TO reclada;
-
 --
--- Name: get_archive_status_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_archive_status_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_archive_status_obj_id() RETURNS uuid
@@ -1326,10 +1233,8 @@ CREATE FUNCTION reclada_object.get_archive_status_obj_id() RETURNS uuid
 $$;
 
 
-ALTER FUNCTION reclada_object.get_archive_status_obj_id() OWNER TO reclada;
-
 --
--- Name: get_condition_array(jsonb, text); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_condition_array(jsonb, text); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_condition_array(data jsonb, key_path text) RETURNS text
@@ -1343,10 +1248,8 @@ CREATE FUNCTION reclada_object.get_condition_array(data jsonb, key_path text) RE
 $$;
 
 
-ALTER FUNCTION reclada_object.get_condition_array(data jsonb, key_path text) OWNER TO reclada;
-
 --
--- Name: get_default_user_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_default_user_obj_id(); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_default_user_obj_id() RETURNS uuid
@@ -1386,10 +1289,8 @@ CREATE FUNCTION reclada_object.get_default_user_obj_id() RETURNS uuid
 $$;
 
 
-ALTER FUNCTION reclada_object.get_default_user_obj_id() OWNER TO reclada;
-
 --
--- Name: get_guid_for_class(text); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_guid_for_class(text); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_guid_for_class(class text) RETURNS TABLE(obj_id uuid)
@@ -1429,10 +1330,8 @@ CREATE FUNCTION reclada_object.get_guid_for_class(class text) RETURNS TABLE(obj_
 $$;
 
 
-ALTER FUNCTION reclada_object.get_guid_for_class(class text) OWNER TO reclada;
-
 --
--- Name: get_jsonschema_guid(); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_jsonschema_guid(); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_jsonschema_guid() RETURNS uuid
@@ -1520,10 +1419,8 @@ CREATE FUNCTION reclada_object.get_jsonschema_guid() RETURNS uuid
 $$;
 
 
-ALTER FUNCTION reclada_object.get_jsonschema_guid() OWNER TO reclada;
-
 --
--- Name: get_query_condition(jsonb, text); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_query_condition(jsonb, text); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_query_condition(data jsonb, key_path text) RETURNS text
@@ -1580,10 +1477,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.get_query_condition(data jsonb, key_path text) OWNER TO reclada;
-
 --
--- Name: get_schema(text); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: get_schema(text); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.get_schema(class text) RETURNS jsonb
@@ -1597,10 +1492,8 @@ CREATE FUNCTION reclada_object.get_schema(class text) RETURNS jsonb
 $$;
 
 
-ALTER FUNCTION reclada_object.get_schema(class text) OWNER TO reclada;
-
 --
--- Name: jsonb_to_text(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: jsonb_to_text(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.jsonb_to_text(data jsonb) RETURNS text
@@ -1622,10 +1515,8 @@ CREATE FUNCTION reclada_object.jsonb_to_text(data jsonb) RETURNS text
 $$;
 
 
-ALTER FUNCTION reclada_object.jsonb_to_text(data jsonb) OWNER TO reclada;
-
 --
--- Name: list(jsonb, boolean); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: list(jsonb, boolean); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.list(data jsonb, gui boolean DEFAULT false) RETURNS jsonb
@@ -1818,10 +1709,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.list(data jsonb, gui boolean) OWNER TO reclada;
-
 --
--- Name: list_add(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: list_add(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.list_add(data jsonb) RETURNS jsonb
@@ -1890,10 +1779,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.list_add(data jsonb) OWNER TO reclada;
-
 --
--- Name: list_drop(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: list_drop(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.list_drop(data jsonb) RETURNS jsonb
@@ -1969,10 +1856,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.list_drop(data jsonb) OWNER TO reclada;
-
 --
--- Name: list_related(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: list_related(jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.list_related(data jsonb) RETURNS jsonb
@@ -2062,10 +1947,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.list_related(data jsonb) OWNER TO reclada;
-
 --
--- Name: update(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: reclada
+-- Name: update(jsonb, jsonb); Type: FUNCTION; Schema: reclada_object; Owner: -
 --
 
 CREATE FUNCTION reclada_object.update(data jsonb, user_info jsonb DEFAULT '{}'::jsonb) RETURNS jsonb
@@ -2164,10 +2047,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_object.update(data jsonb, user_info jsonb) OWNER TO reclada;
-
 --
--- Name: create(character varying, uuid, uuid); Type: FUNCTION; Schema: reclada_revision; Owner: reclada
+-- Name: create(character varying, uuid, uuid); Type: FUNCTION; Schema: reclada_revision; Owner: -
 --
 
 CREATE FUNCTION reclada_revision."create"(userid character varying, branch uuid, obj uuid) RETURNS uuid
@@ -2204,10 +2085,8 @@ CREATE FUNCTION reclada_revision."create"(userid character varying, branch uuid,
 $$;
 
 
-ALTER FUNCTION reclada_revision."create"(userid character varying, branch uuid, obj uuid) OWNER TO reclada;
-
 --
--- Name: auth_by_token(character varying); Type: FUNCTION; Schema: reclada_user; Owner: reclada
+-- Name: auth_by_token(character varying); Type: FUNCTION; Schema: reclada_user; Owner: -
 --
 
 CREATE FUNCTION reclada_user.auth_by_token(token character varying) RETURNS jsonb
@@ -2217,10 +2096,8 @@ CREATE FUNCTION reclada_user.auth_by_token(token character varying) RETURNS json
 $$;
 
 
-ALTER FUNCTION reclada_user.auth_by_token(token character varying) OWNER TO reclada;
-
 --
--- Name: disable_auth(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: reclada
+-- Name: disable_auth(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: -
 --
 
 CREATE FUNCTION reclada_user.disable_auth(data jsonb) RETURNS void
@@ -2232,10 +2109,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_user.disable_auth(data jsonb) OWNER TO reclada;
-
 --
--- Name: is_allowed(jsonb, text, jsonb); Type: FUNCTION; Schema: reclada_user; Owner: reclada
+-- Name: is_allowed(jsonb, text, jsonb); Type: FUNCTION; Schema: reclada_user; Owner: -
 --
 
 CREATE FUNCTION reclada_user.is_allowed(jsonb, text, jsonb) RETURNS boolean
@@ -2247,10 +2122,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_user.is_allowed(jsonb, text, jsonb) OWNER TO reclada;
-
 --
--- Name: refresh_jwk(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: reclada
+-- Name: refresh_jwk(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: -
 --
 
 CREATE FUNCTION reclada_user.refresh_jwk(data jsonb) RETURNS void
@@ -2267,10 +2140,8 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_user.refresh_jwk(data jsonb) OWNER TO reclada;
-
 --
--- Name: setup_keycloak(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: reclada
+-- Name: setup_keycloak(jsonb); Type: FUNCTION; Schema: reclada_user; Owner: -
 --
 
 CREATE FUNCTION reclada_user.setup_keycloak(data jsonb) RETURNS void
@@ -2296,14 +2167,12 @@ END;
 $$;
 
 
-ALTER FUNCTION reclada_user.setup_keycloak(data jsonb) OWNER TO reclada;
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: t_dbg; Type: TABLE; Schema: dev; Owner: reclada
+-- Name: t_dbg; Type: TABLE; Schema: dev; Owner: -
 --
 
 CREATE TABLE dev.t_dbg (
@@ -2313,10 +2182,8 @@ CREATE TABLE dev.t_dbg (
 );
 
 
-ALTER TABLE dev.t_dbg OWNER TO reclada;
-
 --
--- Name: t_dbg_id_seq; Type: SEQUENCE; Schema: dev; Owner: reclada
+-- Name: t_dbg_id_seq; Type: SEQUENCE; Schema: dev; Owner: -
 --
 
 ALTER TABLE dev.t_dbg ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -2330,7 +2197,7 @@ ALTER TABLE dev.t_dbg ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: ver; Type: TABLE; Schema: dev; Owner: reclada
+-- Name: ver; Type: TABLE; Schema: dev; Owner: -
 --
 
 CREATE TABLE dev.ver (
@@ -2343,10 +2210,8 @@ CREATE TABLE dev.ver (
 );
 
 
-ALTER TABLE dev.ver OWNER TO reclada;
-
 --
--- Name: ver_id_seq; Type: SEQUENCE; Schema: dev; Owner: reclada
+-- Name: ver_id_seq; Type: SEQUENCE; Schema: dev; Owner: -
 --
 
 ALTER TABLE dev.ver ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -2360,7 +2225,7 @@ ALTER TABLE dev.ver ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: auth_setting; Type: TABLE; Schema: reclada; Owner: reclada
+-- Name: auth_setting; Type: TABLE; Schema: reclada; Owner: -
 --
 
 CREATE TABLE reclada.auth_setting (
@@ -2371,10 +2236,8 @@ CREATE TABLE reclada.auth_setting (
 );
 
 
-ALTER TABLE reclada.auth_setting OWNER TO reclada;
-
 --
--- Name: object; Type: TABLE; Schema: reclada; Owner: reclada
+-- Name: object; Type: TABLE; Schema: reclada; Owner: -
 --
 
 CREATE TABLE reclada.object (
@@ -2389,10 +2252,8 @@ CREATE TABLE reclada.object (
 );
 
 
-ALTER TABLE reclada.object OWNER TO reclada;
-
 --
--- Name: object_id_seq; Type: SEQUENCE; Schema: reclada; Owner: reclada
+-- Name: object_id_seq; Type: SEQUENCE; Schema: reclada; Owner: -
 --
 
 ALTER TABLE reclada.object ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
@@ -2406,7 +2267,7 @@ ALTER TABLE reclada.object ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: reclada_revisions; Type: SEQUENCE; Schema: reclada; Owner: reclada
+-- Name: reclada_revisions; Type: SEQUENCE; Schema: reclada; Owner: -
 --
 
 CREATE SEQUENCE reclada.reclada_revisions
@@ -2417,10 +2278,8 @@ CREATE SEQUENCE reclada.reclada_revisions
     CACHE 1;
 
 
-ALTER TABLE reclada.reclada_revisions OWNER TO reclada;
-
 --
--- Name: staging; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: staging; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.staging AS
@@ -2428,10 +2287,8 @@ CREATE VIEW reclada.staging AS
   WHERE false;
 
 
-ALTER TABLE reclada.staging OWNER TO reclada;
-
 --
--- Name: v_class_lite; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_class_lite; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_class_lite AS
@@ -2446,10 +2303,8 @@ CREATE VIEW reclada.v_class_lite AS
   WHERE (obj.class = reclada_object.get_jsonschema_guid());
 
 
-ALTER TABLE reclada.v_class_lite OWNER TO reclada;
-
 --
--- Name: v_object_status; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_object_status; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_object_status AS
@@ -2462,10 +2317,8 @@ CREATE VIEW reclada.v_object_status AS
   WHERE (obj.class IN ( SELECT reclada_object.get_guid_for_class('ObjectStatus'::text) AS get_guid_for_class));
 
 
-ALTER TABLE reclada.v_object_status OWNER TO reclada;
-
 --
--- Name: v_user; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_user; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_user AS
@@ -2478,10 +2331,8 @@ CREATE VIEW reclada.v_user AS
   WHERE ((obj.class IN ( SELECT reclada_object.get_guid_for_class('User'::text) AS get_guid_for_class)) AND (obj.status = reclada_object.get_active_status_obj_id()));
 
 
-ALTER TABLE reclada.v_user OWNER TO reclada;
-
 --
--- Name: v_object; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_object; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_object AS
@@ -2525,10 +2376,8 @@ CREATE VIEW reclada.v_object AS
      LEFT JOIN reclada.v_class_lite cl ON ((cl.obj_id = t.class)));
 
 
-ALTER TABLE reclada.v_object OWNER TO reclada;
-
 --
--- Name: v_active_object; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_active_object; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_active_object AS
@@ -2547,10 +2396,8 @@ CREATE VIEW reclada.v_active_object AS
   WHERE (t.status = reclada_object.get_active_status_obj_id());
 
 
-ALTER TABLE reclada.v_active_object OWNER TO reclada;
-
 --
--- Name: v_class; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_class; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_class AS
@@ -2569,10 +2416,8 @@ CREATE VIEW reclada.v_class AS
   WHERE (obj.class_name = 'jsonschema'::text);
 
 
-ALTER TABLE reclada.v_class OWNER TO reclada;
-
 --
--- Name: v_revision; Type: VIEW; Schema: reclada; Owner: reclada
+-- Name: v_revision; Type: VIEW; Schema: reclada; Owner: -
 --
 
 CREATE VIEW reclada.v_revision AS
@@ -2594,10 +2439,8 @@ CREATE VIEW reclada.v_revision AS
   WHERE (obj.class_name = 'revision'::text);
 
 
-ALTER TABLE reclada.v_revision OWNER TO reclada;
-
 --
--- Data for Name: t_dbg; Type: TABLE DATA; Schema: dev; Owner: reclada
+-- Data for Name: t_dbg; Type: TABLE DATA; Schema: dev; Owner: -
 --
 
 COPY dev.t_dbg (id, msg, time_when) FROM stdin;
@@ -2605,7 +2448,7 @@ COPY dev.t_dbg (id, msg, time_when) FROM stdin;
 
 
 --
--- Data for Name: ver; Type: TABLE DATA; Schema: dev; Owner: reclada
+-- Data for Name: ver; Type: TABLE DATA; Schema: dev; Owner: -
 --
 
 COPY dev.ver (id, ver, ver_str, upgrade_script, downgrade_script, run_at) FROM stdin;
@@ -2638,11 +2481,12 @@ COPY dev.ver (id, ver, ver_str, upgrade_script, downgrade_script, run_at) FROM s
 25	24	\N	begin;\nSET CLIENT_ENCODING TO 'utf8';\nCREATE TEMP TABLE var_table\n    (\n        ver int,\n\t\tupgrade_script text,\n\t\tdowngrade_script text\n    );\n\t\ninsert into var_table(ver)\t\n\tselect max(ver) + 1\n        from dev.VER;\n\t\t\nselect reclada.raise_exception('Can not apply this version!') \n\twhere not exists\n\t(\n\t\tselect ver from var_table where ver = 24 --!!! write current version HERE !!!\n\t);\n\nCREATE TEMP TABLE tmp\n(\n\tid int GENERATED ALWAYS AS IDENTITY,\n\tstr text\n);\n--{ logging upgrade script\nCOPY tmp(str) FROM  'up.sql' delimiter E'';\nupdate var_table set upgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\ndelete from tmp;\n--} logging upgrade script\t\n\n--{ create downgrade script\nCOPY tmp(str) FROM  'down.sql' delimiter E'';\nupdate tmp set str = drp.v || scr.v\n\tfrom tmp ttt\n\tinner JOIN LATERAL\n    (\n        select substring(ttt.str from 4 for length(ttt.str)-4) as v\n    )  obj_file_name ON TRUE\n\tinner JOIN LATERAL\n    (\n        select \tsplit_part(obj_file_name.v,'/',1) typ,\n        \t\tsplit_part(obj_file_name.v,'/',2) nam\n    )  obj ON TRUE\n\t\tinner JOIN LATERAL\n    (\n        select case\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t    (select 'DROP '|| obj.typ || ' IF EXISTS '|| obj.nam ||' ON ' || schm||'.'||tbl ||';' || E'\n'\n                        from (\n                            select n.nspname as schm,\n                                   c.relname as tbl\n                            from pg_trigger t\n                                join pg_class c on c.oid = t.tgrelid\n                                join pg_namespace n on n.oid = c.relnamespace\n                            where t.tgname = 'datasource_insert_trigger') o)\n                else 'DROP '||obj.typ|| ' IF EXISTS '|| obj.nam || ' ;' || E'\n'\n                end as v\n    )  drp ON TRUE\n\tinner JOIN LATERAL\n    (\n        select case \n\t\t\t\twhen obj.typ in ('function', 'procedure')\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tSELECT 1 a\n\t\t\t\t\t\t\t\t\t\tFROM pg_proc p \n\t\t\t\t\t\t\t\t\t\tjoin pg_namespace n \n\t\t\t\t\t\t\t\t\t\t\ton p.pronamespace = n.oid \n\t\t\t\t\t\t\t\t\t\t\twhere n.nspname||'.'||p.proname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_functiondef(obj.nam::regproc::oid))||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'view'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a \n\t\t\t\t\t\t\t\t\t\tfrom pg_views v \n\t\t\t\t\t\t\t\t\t\t\twhere v.schemaname||'.'||v.viewname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen E'CREATE OR REPLACE VIEW '\n                                        || obj.nam\n                                        || E'\nAS\n'\n                                        || (select pg_get_viewdef(obj.nam, true))\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase\n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a\n\t\t\t\t\t\t\t\t\t\tfrom pg_trigger v\n                                            where v.tgname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_triggerdef(oid, true)\n\t\t\t\t\t\t\t\t        from pg_trigger\n\t\t\t\t\t\t\t\t        where tgname = obj.nam)||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\telse \n\t\t\t\t\tttt.str\n\t\t\tend as v\n    )  scr ON TRUE\n\twhere ttt.id = tmp.id\n\t\tand tmp.str like '--{%/%}';\n\t\nupdate var_table set downgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\t\n--} create downgrade script\ndrop table tmp;\n\n\n--{!!! write upgrare script HERE !!!\n\n--\tyou can use "i 'function/reclada_object.get_schema.sql'"\n--\tto run text script of functions\n \n/*\n    you can use "i 'function/reclada_object.get_schema.sql'"\n    to run text script of functions\n*/\n\ni 'function/dev.reg_notice.sql'\n\nSELECT reclada_object.create_subclass('{\n    "class": "RecladaObject",\n    "attributes": {\n        "newClass": "Context",\n        "properties": {\n            "Lambda": {"type": "string"}\n\t\t\t,"Environment": {"type": "string"}\n        },\n        "required": ["Environment"]\n    }\n}'::jsonb);\n\n\nDELETE\nFROM reclada.object\nWHERE class = reclada_object.get_jsonschema_GUID() and attributes->>'forClass'='Lambda';\n\ni 'function/api.storage_generate_presigned_get.sql'\ni 'function/api.storage_generate_presigned_post.sql'\ni 'function/reclada.datasource_insert_trigger_fnc.sql'\n\n--}!!! write upgrare script HERE !!!\n\ninsert into dev.ver(ver,upgrade_script,downgrade_script)\n\tselect ver, upgrade_script, downgrade_script\n\t\tfrom var_table;\n\n--{ testing downgrade script\nSAVEPOINT sp;\n    select dev.downgrade_version();\nROLLBACK TO sp;\n--} testing downgrade script\n\nselect reclada.raise_notice('OK, curren version: ' \n\t\t\t\t\t\t\t|| (select ver from var_table)::text\n\t\t\t\t\t\t  );\ndrop table var_table;\n\ncommit;	-- you you can use "--{function/reclada_object.get_schema}"\n-- to add current version of object to downgrade script\n\nselect reclada.raise_exception('Downgrade script not support');	2021-09-17 09:42:33.220341+00
 26	25	\N	begin;\nSET CLIENT_ENCODING TO 'utf8';\nCREATE TEMP TABLE var_table\n    (\n        ver int,\n\t\tupgrade_script text,\n\t\tdowngrade_script text\n    );\n\t\ninsert into var_table(ver)\t\n\tselect max(ver) + 1\n        from dev.VER;\n\t\t\nselect reclada.raise_exception('Can not apply this version!') \n\twhere not exists\n\t(\n\t\tselect ver from var_table where ver = 25 --!!! write current version HERE !!!\n\t);\n\nCREATE TEMP TABLE tmp\n(\n\tid int GENERATED ALWAYS AS IDENTITY,\n\tstr text\n);\n--{ logging upgrade script\nCOPY tmp(str) FROM  'up.sql' delimiter E'';\nupdate var_table set upgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\ndelete from tmp;\n--} logging upgrade script\t\n\n--{ create downgrade script\nCOPY tmp(str) FROM  'down.sql' delimiter E'';\nupdate tmp set str = drp.v || scr.v\n\tfrom tmp ttt\n\tinner JOIN LATERAL\n    (\n        select substring(ttt.str from 4 for length(ttt.str)-4) as v\n    )  obj_file_name ON TRUE\n\tinner JOIN LATERAL\n    (\n        select \tsplit_part(obj_file_name.v,'/',1) typ,\n        \t\tsplit_part(obj_file_name.v,'/',2) nam\n    )  obj ON TRUE\n\t\tinner JOIN LATERAL\n    (\n        select case\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t    (select 'DROP '|| obj.typ || ' IF EXISTS '|| obj.nam ||' ON ' || schm||'.'||tbl ||';' || E'\n'\n                        from (\n                            select n.nspname as schm,\n                                   c.relname as tbl\n                            from pg_trigger t\n                                join pg_class c on c.oid = t.tgrelid\n                                join pg_namespace n on n.oid = c.relnamespace\n                            where t.tgname = 'datasource_insert_trigger') o)\n                else 'DROP '||obj.typ|| ' IF EXISTS '|| obj.nam || ' ;' || E'\n'\n                end as v\n    )  drp ON TRUE\n\tinner JOIN LATERAL\n    (\n        select case \n\t\t\t\twhen obj.typ in ('function', 'procedure')\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tSELECT 1 a\n\t\t\t\t\t\t\t\t\t\tFROM pg_proc p \n\t\t\t\t\t\t\t\t\t\tjoin pg_namespace n \n\t\t\t\t\t\t\t\t\t\t\ton p.pronamespace = n.oid \n\t\t\t\t\t\t\t\t\t\t\twhere n.nspname||'.'||p.proname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_functiondef(obj.nam::regproc::oid))||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'view'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a \n\t\t\t\t\t\t\t\t\t\tfrom pg_views v \n\t\t\t\t\t\t\t\t\t\t\twhere v.schemaname||'.'||v.viewname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen E'CREATE OR REPLACE VIEW '\n                                        || obj.nam\n                                        || E'\nAS\n'\n                                        || (select pg_get_viewdef(obj.nam, true))\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase\n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a\n\t\t\t\t\t\t\t\t\t\tfrom pg_trigger v\n                                            where v.tgname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_triggerdef(oid, true)\n\t\t\t\t\t\t\t\t        from pg_trigger\n\t\t\t\t\t\t\t\t        where tgname = obj.nam)||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\telse \n\t\t\t\t\tttt.str\n\t\t\tend as v\n    )  scr ON TRUE\n\twhere ttt.id = tmp.id\n\t\tand tmp.str like '--{%/%}';\n\t\nupdate var_table set downgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\t\n--} create downgrade script\ndrop table tmp;\n\n\n--{!!! write upgrare script HERE !!!\n\n--\tyou can use "i 'function/reclada_object.get_schema.sql'"\n--\tto run text script of functions\n \n/*\n    you can use "i 'function/reclada_object.get_schema.sql'"\n    to run text script of functions\n*/\n\n\n--}!!! write upgrare script HERE !!!\n\ninsert into dev.ver(ver,upgrade_script,downgrade_script)\n\tselect ver, upgrade_script, downgrade_script\n\t\tfrom var_table;\n\n--{ testing downgrade script\nSAVEPOINT sp;\n    select dev.downgrade_version();\nROLLBACK TO sp;\n--} testing downgrade script\n\nselect reclada.raise_notice('OK, curren version: ' \n\t\t\t\t\t\t\t|| (select ver from var_table)::text\n\t\t\t\t\t\t  );\ndrop table var_table;\n\ncommit;	-- you you can use "--{function/reclada_object.get_schema}"\n-- to add current version of object to downgrade script\n\nselect reclada.raise_exception('Downgrade script not support');	2021-09-17 10:10:45.968952+00
 27	26	\N	begin;\nSET CLIENT_ENCODING TO 'utf8';\nCREATE TEMP TABLE var_table\n    (\n        ver int,\n\t\tupgrade_script text,\n\t\tdowngrade_script text\n    );\n\t\ninsert into var_table(ver)\t\n\tselect max(ver) + 1\n        from dev.VER;\n\t\t\nselect reclada.raise_exception('Can not apply this version!') \n\twhere not exists\n\t(\n\t\tselect ver from var_table where ver = 26 --!!! write current version HERE !!!\n\t);\n\nCREATE TEMP TABLE tmp\n(\n\tid int GENERATED ALWAYS AS IDENTITY,\n\tstr text\n);\n--{ logging upgrade script\nCOPY tmp(str) FROM  'up.sql' delimiter E'';\nupdate var_table set upgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\ndelete from tmp;\n--} logging upgrade script\t\n\n--{ create downgrade script\nCOPY tmp(str) FROM  'down.sql' delimiter E'';\nupdate tmp set str = drp.v || scr.v\n\tfrom tmp ttt\n\tinner JOIN LATERAL\n    (\n        select substring(ttt.str from 4 for length(ttt.str)-4) as v\n    )  obj_file_name ON TRUE\n\tinner JOIN LATERAL\n    (\n        select \tsplit_part(obj_file_name.v,'/',1) typ,\n        \t\tsplit_part(obj_file_name.v,'/',2) nam\n    )  obj ON TRUE\n\t\tinner JOIN LATERAL\n    (\n        select case\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t    (select 'DROP '|| obj.typ || ' IF EXISTS '|| obj.nam ||' ON ' || schm||'.'||tbl ||';' || E'\n'\n                        from (\n                            select n.nspname as schm,\n                                   c.relname as tbl\n                            from pg_trigger t\n                                join pg_class c on c.oid = t.tgrelid\n                                join pg_namespace n on n.oid = c.relnamespace\n                            where t.tgname = 'datasource_insert_trigger') o)\n                else 'DROP '||obj.typ|| ' IF EXISTS '|| obj.nam || ' ;' || E'\n'\n                end as v\n    )  drp ON TRUE\n\tinner JOIN LATERAL\n    (\n        select case \n\t\t\t\twhen obj.typ in ('function', 'procedure')\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tSELECT 1 a\n\t\t\t\t\t\t\t\t\t\tFROM pg_proc p \n\t\t\t\t\t\t\t\t\t\tjoin pg_namespace n \n\t\t\t\t\t\t\t\t\t\t\ton p.pronamespace = n.oid \n\t\t\t\t\t\t\t\t\t\t\twhere n.nspname||'.'||p.proname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_functiondef(obj.nam::regproc::oid))||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'view'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a \n\t\t\t\t\t\t\t\t\t\tfrom pg_views v \n\t\t\t\t\t\t\t\t\t\t\twhere v.schemaname||'.'||v.viewname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen E'CREATE OR REPLACE VIEW '\n                                        || obj.nam\n                                        || E'\nAS\n'\n                                        || (select pg_get_viewdef(obj.nam, true))\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase\n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a\n\t\t\t\t\t\t\t\t\t\tfrom pg_trigger v\n                                            where v.tgname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_triggerdef(oid, true)\n\t\t\t\t\t\t\t\t        from pg_trigger\n\t\t\t\t\t\t\t\t        where tgname = obj.nam)||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\telse \n\t\t\t\t\tttt.str\n\t\t\tend as v\n    )  scr ON TRUE\n\twhere ttt.id = tmp.id\n\t\tand tmp.str like '--{%/%}';\n\t\nupdate var_table set downgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\t\n--} create downgrade script\ndrop table tmp;\n\n\n--{!!! write upgrare script HERE !!!\n\n--\tyou can use "i 'function/reclada_object.get_schema.sql'"\n--\tto run text script of functions\n \n/*\n    you can use "i 'function/reclada_object.get_schema.sql'"\n    to run text script of functions\n*/\ni 'function/api.storage_generate_presigned_get.sql'\ni 'function/reclada_object.create.sql'\ni 'function/reclada_object.update.sql'\n\n--}!!! write upgrare script HERE !!!\n\ninsert into dev.ver(ver,upgrade_script,downgrade_script)\n\tselect ver, upgrade_script, downgrade_script\n\t\tfrom var_table;\n\n--{ testing downgrade script\nSAVEPOINT sp;\n    select dev.downgrade_version();\nROLLBACK TO sp;\n--} testing downgrade script\n\nselect reclada.raise_notice('OK, curren version: ' \n\t\t\t\t\t\t\t|| (select ver from var_table)::text\n\t\t\t\t\t\t  );\ndrop table var_table;\n\ncommit;	-- you you can use "--{function/reclada_object.get_schema}"\n-- to add current version of object to downgrade script\n\nselect reclada.raise_exception('Downgrade script not support');	2021-09-17 12:16:11.528164+00
+30	29	\N	begin;\nSET CLIENT_ENCODING TO 'utf8';\nCREATE TEMP TABLE var_table\n    (\n        ver int,\n\t\tupgrade_script text,\n\t\tdowngrade_script text\n    );\n\t\ninsert into var_table(ver)\t\n\tselect max(ver) + 1\n        from dev.VER;\n\t\t\nselect reclada.raise_exception('Can not apply this version!') \n\twhere not exists\n\t(\n\t\tselect ver from var_table where ver = 29 --!!! write current version HERE !!!\n\t);\n\nCREATE TEMP TABLE tmp\n(\n\tid int GENERATED ALWAYS AS IDENTITY,\n\tstr text\n);\n--{ logging upgrade script\nCOPY tmp(str) FROM  'up.sql' delimiter E'';\nupdate var_table set upgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\ndelete from tmp;\n--} logging upgrade script\t\n\n--{ create downgrade script\nCOPY tmp(str) FROM  'down.sql' delimiter E'';\nupdate tmp set str = drp.v || scr.v\n\tfrom tmp ttt\n\tinner JOIN LATERAL\n    (\n        select substring(ttt.str from 4 for length(ttt.str)-4) as v\n    )  obj_file_name ON TRUE\n\tinner JOIN LATERAL\n    (\n        select \tsplit_part(obj_file_name.v,'/',1) typ,\n        \t\tsplit_part(obj_file_name.v,'/',2) nam\n    )  obj ON TRUE\n\t\tinner JOIN LATERAL\n    (\n        select case\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t    (select 'DROP '|| obj.typ || ' IF EXISTS '|| obj.nam ||' ON ' || schm||'.'||tbl ||';' || E'\n'\n                        from (\n                            select n.nspname as schm,\n                                   c.relname as tbl\n                            from pg_trigger t\n                                join pg_class c on c.oid = t.tgrelid\n                                join pg_namespace n on n.oid = c.relnamespace\n                            where t.tgname = 'datasource_insert_trigger') o)\n                else 'DROP '||obj.typ|| ' IF EXISTS '|| obj.nam || ' ;' || E'\n'\n                end as v\n    )  drp ON TRUE\n\tinner JOIN LATERAL\n    (\n        select case \n\t\t\t\twhen obj.typ in ('function', 'procedure')\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tSELECT 1 a\n\t\t\t\t\t\t\t\t\t\tFROM pg_proc p \n\t\t\t\t\t\t\t\t\t\tjoin pg_namespace n \n\t\t\t\t\t\t\t\t\t\t\ton p.pronamespace = n.oid \n\t\t\t\t\t\t\t\t\t\t\twhere n.nspname||'.'||p.proname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_functiondef(obj.nam::regproc::oid))||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'view'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase \n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a \n\t\t\t\t\t\t\t\t\t\tfrom pg_views v \n\t\t\t\t\t\t\t\t\t\t\twhere v.schemaname||'.'||v.viewname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t) \n\t\t\t\t\t\t\t\tthen E'CREATE OR REPLACE VIEW '\n                                        || obj.nam\n                                        || E'\nAS\n'\n                                        || (select pg_get_viewdef(obj.nam, true))\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\twhen obj.typ = 'trigger'\n\t\t\t\t\tthen\n\t\t\t\t\t\tcase\n\t\t\t\t\t\t\twhen EXISTS\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\tselect 1 a\n\t\t\t\t\t\t\t\t\t\tfrom pg_trigger v\n                                            where v.tgname = obj.nam\n\t\t\t\t\t\t\t\t\t\tLIMIT 1\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\tthen (select pg_catalog.pg_get_triggerdef(oid, true)\n\t\t\t\t\t\t\t\t        from pg_trigger\n\t\t\t\t\t\t\t\t        where tgname = obj.nam)||';'\n\t\t\t\t\t\t\telse ''\n\t\t\t\t\t\tend\n\t\t\t\telse \n\t\t\t\t\tttt.str\n\t\t\tend as v\n    )  scr ON TRUE\n\twhere ttt.id = tmp.id\n\t\tand tmp.str like '--{%/%}';\n\t\nupdate var_table set downgrade_script = array_to_string(ARRAY((select str from tmp order by id asc)),chr(10),'');\t\n--} create downgrade script\ndrop table tmp;\n\n\n--{!!! write upgrare script HERE !!!\n\n--\tyou can use "i 'function/reclada_object.get_schema.sql'"\n--\tto run text script of functions\n \n/*\n    you can use "i 'function/reclada_object.get_schema.sql'"\n    to run text script of functions\n*/\n\ni 'function/reclada_object.list.sql'\n\n\ni 'function/api.auth_get_login_url copy.sql'\ni 'function/api.auth_get_login_url.sql'\ni 'function/api.hello_world.sql'\ni 'function/api.reclada_object_create.sql'\ni 'function/api.reclada_object_delete.sql'\ni 'function/api.reclada_object_list.sql'\ni 'function/api.reclada_object_list_add.sql'\ni 'function/api.reclada_object_list_drop.sql'\ni 'function/api.reclada_object_list_related.sql'\ni 'function/api.reclada_object_update.sql'\ni 'function/api.storage_generate_presigned_get.sql'\ni 'function/api.storage_generate_presigned_post.sql'\ni 'function/dev.downgrade_version.sql'\ni 'function/dev.reg_notice.sql'\ni 'function/reclada.datasource_insert_trigger_fnc.sql'\ni 'function/reclada.load_staging.sql'\ni 'function/reclada.raise_exception.sql'\ni 'function/reclada.raise_notice.sql'\ni 'function/reclada.try_cast_int.sql'\ni 'function/reclada.try_cast_uuid.sql'\ni 'function/reclada_notification.listen.sql'\ni 'function/reclada_notification.send.sql'\ni 'function/reclada_notification.send_object_notification.sql'\ni 'function/reclada_object.cast_jsonb_to_postgres.sql'\ni 'function/reclada_object.create.sql'\ni 'function/reclada_object.create_subclass.sql'\ni 'function/reclada_object.delete.sql'\ni 'function/reclada_object.get_archive_status_obj_id.sql'\ni 'function/reclada_object.get_condition_array.sql'\ni 'function/reclada_object.get_query_condition.sql'\ni 'function/reclada_object.get_schema.sql'\ni 'function/reclada_object.jsonb_to_text.sql'\ni 'function/reclada_object.list.sql'\ni 'function/reclada_object.list_add.sql'\ni 'function/reclada_object.list_drop.sql'\ni 'function/reclada_object.list_related.sql'\ni 'function/reclada_object.update.sql'\ni 'function/reclada_revision.create.sql'\ni 'function/reclada_user.auth_by_token.sql'\ni 'function/reclada_user.disable_auth.sql'\ni 'function/reclada_user.is_allowed.sql'\ni 'function/reclada_user.setup_keycloak.sql'\n\n--}!!! write upgrare script HERE !!!\n\ninsert into dev.ver(ver,upgrade_script,downgrade_script)\n\tselect ver, upgrade_script, downgrade_script\n\t\tfrom var_table;\n\n--{ testing downgrade script\nSAVEPOINT sp;\n    select dev.downgrade_version();\nROLLBACK TO sp;\n--} testing downgrade script\n\nselect reclada.raise_notice('OK, curren version: ' \n\t\t\t\t\t\t\t|| (select ver from var_table)::text\n\t\t\t\t\t\t  );\ndrop table var_table;\n\ncommit;	-- you you can use "--{function/reclada_object.get_schema}"\n-- to add current version of object to downgrade script\n\nselect reclada.raise_exception('Downgrade script not support');	2021-09-21 16:20:59.342517+00
 \.
 
 
 --
--- Data for Name: auth_setting; Type: TABLE DATA; Schema: reclada; Owner: reclada
+-- Data for Name: auth_setting; Type: TABLE DATA; Schema: reclada; Owner: -
 --
 
 COPY reclada.auth_setting (oidc_url, oidc_client_id, oidc_redirect_url, jwk) FROM stdin;
@@ -2650,7 +2494,7 @@ COPY reclada.auth_setting (oidc_url, oidc_client_id, oidc_redirect_url, jwk) FRO
 
 
 --
--- Data for Name: object; Type: TABLE DATA; Schema: reclada; Owner: reclada
+-- Data for Name: object; Type: TABLE DATA; Schema: reclada; Owner: -
 --
 
 COPY reclada.object (id, status, attributes, transaction_id, created_time, created_by, class, guid) FROM stdin;
@@ -2721,35 +2565,35 @@ COPY reclada.object (id, status, attributes, transaction_id, created_time, creat
 
 
 --
--- Name: t_dbg_id_seq; Type: SEQUENCE SET; Schema: dev; Owner: reclada
+-- Name: t_dbg_id_seq; Type: SEQUENCE SET; Schema: dev; Owner: -
 --
 
-SELECT pg_catalog.setval('dev.t_dbg_id_seq', 16, true);
-
-
---
--- Name: ver_id_seq; Type: SEQUENCE SET; Schema: dev; Owner: reclada
---
-
-SELECT pg_catalog.setval('dev.ver_id_seq', 29, true);
+SELECT pg_catalog.setval('dev.t_dbg_id_seq', 17, true);
 
 
 --
--- Name: object_id_seq; Type: SEQUENCE SET; Schema: reclada; Owner: reclada
+-- Name: ver_id_seq; Type: SEQUENCE SET; Schema: dev; Owner: -
+--
+
+SELECT pg_catalog.setval('dev.ver_id_seq', 30, true);
+
+
+--
+-- Name: object_id_seq; Type: SEQUENCE SET; Schema: reclada; Owner: -
 --
 
 SELECT pg_catalog.setval('reclada.object_id_seq', 64, true);
 
 
 --
--- Name: reclada_revisions; Type: SEQUENCE SET; Schema: reclada; Owner: reclada
+-- Name: reclada_revisions; Type: SEQUENCE SET; Schema: reclada; Owner: -
 --
 
 SELECT pg_catalog.setval('reclada.reclada_revisions', 21, true);
 
 
 --
--- Name: object object_pkey; Type: CONSTRAINT; Schema: reclada; Owner: reclada
+-- Name: object object_pkey; Type: CONSTRAINT; Schema: reclada; Owner: -
 --
 
 ALTER TABLE ONLY reclada.object
@@ -2757,42 +2601,42 @@ ALTER TABLE ONLY reclada.object
 
 
 --
--- Name: class_index; Type: INDEX; Schema: reclada; Owner: reclada
+-- Name: class_index; Type: INDEX; Schema: reclada; Owner: -
 --
 
 CREATE INDEX class_index ON reclada.object USING btree (class);
 
 
 --
--- Name: guid_index; Type: INDEX; Schema: reclada; Owner: reclada
+-- Name: guid_index; Type: INDEX; Schema: reclada; Owner: -
 --
 
 CREATE INDEX guid_index ON reclada.object USING btree (guid);
 
 
 --
--- Name: status_index; Type: INDEX; Schema: reclada; Owner: reclada
+-- Name: status_index; Type: INDEX; Schema: reclada; Owner: -
 --
 
 CREATE INDEX status_index ON reclada.object USING btree (status);
 
 
 --
--- Name: object datasource_insert_trigger; Type: TRIGGER; Schema: reclada; Owner: reclada
+-- Name: object datasource_insert_trigger; Type: TRIGGER; Schema: reclada; Owner: -
 --
 
 CREATE TRIGGER datasource_insert_trigger BEFORE INSERT ON reclada.object FOR EACH ROW EXECUTE FUNCTION reclada.datasource_insert_trigger_fnc();
 
 
 --
--- Name: staging load_staging; Type: TRIGGER; Schema: reclada; Owner: reclada
+-- Name: staging load_staging; Type: TRIGGER; Schema: reclada; Owner: -
 --
 
 CREATE TRIGGER load_staging INSTEAD OF INSERT ON reclada.staging FOR EACH ROW EXECUTE FUNCTION reclada.load_staging();
 
 
 --
--- Name: FUNCTION invoke(function_name aws_commons._lambda_function_arn_1, payload json, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: rds_superuser
+-- Name: FUNCTION invoke(function_name aws_commons._lambda_function_arn_1, payload json, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: -
 --
 
 REVOKE ALL ON FUNCTION aws_lambda.invoke(function_name aws_commons._lambda_function_arn_1, payload json, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text) FROM rdsadmin;
@@ -2800,7 +2644,7 @@ GRANT ALL ON FUNCTION aws_lambda.invoke(function_name aws_commons._lambda_functi
 
 
 --
--- Name: FUNCTION invoke(function_name aws_commons._lambda_function_arn_1, payload jsonb, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: rds_superuser
+-- Name: FUNCTION invoke(function_name aws_commons._lambda_function_arn_1, payload jsonb, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: -
 --
 
 REVOKE ALL ON FUNCTION aws_lambda.invoke(function_name aws_commons._lambda_function_arn_1, payload jsonb, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text) FROM rdsadmin;
@@ -2808,7 +2652,7 @@ GRANT ALL ON FUNCTION aws_lambda.invoke(function_name aws_commons._lambda_functi
 
 
 --
--- Name: FUNCTION invoke(function_name text, payload json, region text, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: rds_superuser
+-- Name: FUNCTION invoke(function_name text, payload json, region text, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: -
 --
 
 REVOKE ALL ON FUNCTION aws_lambda.invoke(function_name text, payload json, region text, invocation_type text, log_type text, context json, qualifier character varying, OUT status_code integer, OUT payload json, OUT executed_version text, OUT log_result text) FROM rdsadmin;
@@ -2816,7 +2660,7 @@ GRANT ALL ON FUNCTION aws_lambda.invoke(function_name text, payload json, region
 
 
 --
--- Name: FUNCTION invoke(function_name text, payload jsonb, region text, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: rds_superuser
+-- Name: FUNCTION invoke(function_name text, payload jsonb, region text, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text); Type: ACL; Schema: aws_lambda; Owner: -
 --
 
 REVOKE ALL ON FUNCTION aws_lambda.invoke(function_name text, payload jsonb, region text, invocation_type text, log_type text, context jsonb, qualifier character varying, OUT status_code integer, OUT payload jsonb, OUT executed_version text, OUT log_result text) FROM rdsadmin;
